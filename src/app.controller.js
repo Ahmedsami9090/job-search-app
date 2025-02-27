@@ -9,13 +9,23 @@ import companyRouter from "./modules/company/company.controller.js"
 import jobRouter from "./modules/job/job.controller.js"
 import { createHandler } from 'graphql-http/lib/use/express';
 import schema from "./modules/admin/schema.js"
+import rateLimit from "express-rate-limit"
+import helmet from "helmet"
 dotenv.config()
 
+const limiter = rateLimit({
+	windowMs: 15 * 60 * 1000, 
+	limit: 100, 
+	standardHeaders: 'draft-8', 
+	legacyHeaders: false, 
+})
 const bootstrap = async (app, express, server)=>{
     await connection()
     app.use(cors({
         origin : "*"
     }))
+    app.use(limiter)
+    app.use(helmet())
     cron.schedule('0 */6 * * *', () => {
         console.log('Running OTP cleanup job...');
         deleteExpiredOtps();
