@@ -117,7 +117,7 @@ User Endpoints:
 - **DELETE /users/cover-pic** - Delete Cover picture.
 - **DELETE /users/delete** - Delete account.
 
-Company EndPOints:
+Company EndPoints:
 - **POST /company/new** - create new Company account.
 - **PATCH /company/update/:companyId** - Update company information.
 - **DELETE /company/delete/:companyId** - Delete company account.
@@ -139,4 +139,3 @@ Jobs Endpoints:
 - **PUT /jobs/application/:applicationId/status** - Change status of job application.
 
 Chat Endpoints (soon).
----
